@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sensor Data</title>
+  <script>
+    function fetchData() {
+      fetch('/arduino/latest/')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('timestamp').innerText = data.timestamp;
+          document.getElementById('sensorData').innerText = data.data;
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+
+    // Fetch data every second
+    setInterval(fetchData, 1000);
+    fetchData(); // Initial fetch
+  </script>
+</head>
+<body>
+  <h1>Sensor Data</h1>
+  <p>Timestamp: <span id="timestamp">Loading...</span></p>
+  <p>Data: <span id="sensorData">Loading...</span></p>
+</body>
+</html>
